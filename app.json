@@ -1,0 +1,44 @@
+{
+	"name": "filesharing",
+	"description": "file sharing bot",
+	"repository": "https://github.com/Amalrajanj/filesaverobot",
+    "logo": "https://node-js-sample.herokuapp.com/node.png",
+	"keywords": ["telegram","filesharing","bot","nodejs"],
+	"env": {
+		"TOKEN": {
+			"description": "bot token provided by @botfather",
+            "value":"token"
+		},
+        "DOMAIN":{
+            "description": "enter your heroku app name",
+            "value":"domain"
+		},
+        "DB_URL":{
+            "description": "get mongodb database url from https://www.mongodb.com/cloud/atlas with database name = mediaFile and collection name = fileBackup",
+            "value":"db"
+        },
+        "ADMIN":{
+            "description": "enter your id",
+            "value":"admin_id"
+        },
+        "BOTUSERNAME":{
+            "description":"Enter your bot username without @",
+            "value":"botusername"
+        },
+        "LOG_CHANNEL":{
+            "description":"create a private channel and enter channel id to monitor files,get user and file data",
+            "value":"channel"
+        },
+        "POST_BOT_ID":{
+            "description":"create a bot with botfather and connect it to @lastatbot and grab your bots id",
+            "value":"postbotid"
+        }
+        
+        	
+	},
+	"buildpacks": [
+		{
+			"url": "heroku/nodejs"
+		}
+	]
+}
