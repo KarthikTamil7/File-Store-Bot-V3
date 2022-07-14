@@ -29,6 +29,14 @@
             "description":"create a private channel and enter channel id to monitor files,get user and file data",
             "value":"channel"
         },
+        "MAIN_CHANNEL":{
+            "description":"Enter your main channel ID which you want users to join,It would be something like -1001234567889",
+            "value":"mainchannel"
+        },
+        "INVITE_LINK":{
+            "description":"Enter your main channel invite link for users to join",
+            "value":"invitelink"
+        },
         "POST_BOT_ID":{
             "description":"create a bot with botfather and connect it to @lastatbot and grab your bots id",
             "value":"postbotid"

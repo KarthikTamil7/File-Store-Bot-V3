@@ -15,7 +15,6 @@ connect((err) => {
     console.log("db connected");
   }
 });
-
 bot.start(async (ctx) => {
   let msgArray = ctx.message.text.split(" ");
   msgArray.shift();
@@ -102,9 +101,7 @@ bot.start(async (ctx) => {
                     {
                       text: "✔ JOIN CHANNEL",
                       url: `${
-                        assets
-                          ? assets.channel
-                          : `https://t.me/+iD-GzNZwWus3YTEx`
+                        assets ? assets.channel : process.env.INVITE_LINK
                       }`,
                     },
                   ],
@@ -797,59 +794,34 @@ bot.action("CHECKJOINED", async (ctx) => {
     .getChatMember(process.env.MAIN_CHANNEL, ctx.from.id)
     .then(async (channelStatus) => {
       if (channelStatus.status != "left") {
-        if (msgArray.length < 1) {
-          db.getAUser(ctx.from.id).then(async (res) => {
-            if (res.admin || ctx.from.id == process.env.ADMIN) {
-              return await ctx.replyWithHTML(
-                `Hello <b>${ctx.from.first_name} </b> welcome to admin panel`,
-                Markup.keyboard([
-                  ["👤 Manage admins", "⚙ Config bot"],
-                  ["📊 Bot status"],
-                  ["🗑 Delete files", "☢ Delete all"],
-                  ["🛑 Ban", "♻ Unban"],
-                  ["💌 Broadcast"],
-                ])
-                  .oneTime()
-                  .resize()
-              );
-            } else {
-              ctx.reply(
-                `<b>I will store files for you and generate sharable links</b>`,
-                {
-                  parse_mode: "HTML",
-                  reply_markup: {
-                    inline_keyboard: [
-                      [{ text: "Search", switch_inline_query: "" }],
-                    ],
-                  },
-                }
-              );
-            }
-          });
-        } else {
-          //handle file queries
-          await db.getFile(query).then((res) => {
-            if (res.type == "video") {
-              ctx.replyWithVideo(res.file_id, {
-                caption: res.caption,
-                parse_mode: "Markdown",
-                reply_markup: res.reply_markup ?? null,
-              });
-            } else if (res.type == "photo") {
-              ctx.replyWithPhoto(res.file_id, {
-                caption: res.caption,
-                parse_mode: "Markdown",
-                reply_markup: res.reply_markup ?? null,
-              });
-            } else {
-              ctx.replyWithDocument(res.file_id, {
-                caption: res.caption,
-                parse_mode: "Markdown",
-                reply_markup: res.reply_markup ?? null,
-              });
-            }
-          });
-        }
+        db.getAUser(ctx.from.id).then(async (res) => {
+          if (res.admin || ctx.from.id == process.env.ADMIN) {
+            return await ctx.replyWithHTML(
+              `Hello <b>${ctx.from.first_name} </b> welcome to admin panel`,
+              Markup.keyboard([
+                ["👤 Manage admins", "⚙ Config bot"],
+                ["📊 Bot status"],
+                ["🗑 Delete files", "☢ Delete all"],
+                ["🛑 Ban", "♻ Unban"],
+                ["💌 Broadcast"],
+              ])
+                .oneTime()
+                .resize()
+            );
+          } else {
+            ctx.reply(
+              `<b>I will store files for you and generate sharable links</b>`,
+              {
+                parse_mode: "HTML",
+                reply_markup: {
+                  inline_keyboard: [
+                    [{ text: "Search", switch_inline_query: "" }],
+                  ],
+                },
+              }
+            );
+          }
+        });
       } else {
         //fetch data from db and insert channel link
         db.getBotAssets().then((res) => {
@@ -863,9 +835,7 @@ bot.action("CHECKJOINED", async (ctx) => {
                     {
                       text: "✔ JOIN CHANNEL",
                       url: `${
-                        assets
-                          ? assets.channel
-                          : `https://t.me/+iD-GzNZwWus3YTEx`
+                        assets ? assets.channel : process.env.INVITE_LINK
                       }`,
                     },
                   ],
