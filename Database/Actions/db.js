@@ -16,12 +16,16 @@ export const db = {
   },
   getAUser: (userId) => {
     return new Promise((resolve, reject) => {
-      get()
-        .collection(collection.USER_COLLECTION)
-        .findOne({ userId: userId })
-        .then((res) => {
-          res ? resolve(res) : resolve(false);
-        });
+      try {
+        get()
+          .collection(collection.USER_COLLECTION)
+          .findOne({ userId: userId })
+          .then((res) => {
+            res ? resolve(res) : resolve(false);
+          });
+      } catch (error) {
+        console.log(error);
+      }
     });
   },
   updateUser: (user) => {
