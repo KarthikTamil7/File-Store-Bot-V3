@@ -52,7 +52,9 @@ bot.start(async (ctx) => {
               );
             } else {
               ctx.reply(
-                `<b>I will store files for you and generate sharable links</b>`,
+                `<b>Hi👋 Bro...
+
+I'm an HMTD Official File Store Bot Maintained by @HMTD_Links. I will Store Files for you and Give Sharable Links. Keep me Join to Our Official Channel to Receive Bot & Movies Updates in @HMTD_Links.</b>`,
                 {
                   parse_mode: "HTML",
                   reply_markup: {
