@@ -52,7 +52,7 @@ bot.start(async (ctx) => {
               );
             } else {
               ctx.reply(
-                `<b>Hi👋 Bro...
+                `<b>Hi👋 <b>${ctx.from.first_name}</b>
 I'm an HMTD Official File Store Bot Maintained by @HMTD_Links. I will Store Files for you and Generate Sharable Links. Keep me Join to Our Official Channel to Receive Bot & Movies Updates in @HMTD_Links.</b>`,
                 {
                   parse_mode: "HTML",
@@ -164,7 +164,7 @@ bot.hears("👤 Manage admins", async (ctx) => {
 
 //bot status
 
-bot.hears("📊 Bot status", (ctx) => {
+bot.hears("📊 Bot Status", (ctx) => {
   ctx.deleteMessage();
   db.getAUser(ctx.from.id).then((res) => {
     if (res.admin || ctx.from.id == process.env.ADMIN) {
@@ -1043,7 +1043,7 @@ bot.on("message", async (ctx) => {
 
     //Sharing public link for saved files
     ctx.reply(
-      `https://t.me/${process.env.BOTUSERNAME}?start=${fileDetails.shortid}`
+      `https://telegram.me/${process.env.BOTUSERNAME}?start=${fileDetails.shortid}`
     );
   }
 });
