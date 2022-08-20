@@ -1033,7 +1033,7 @@ bot.on("message", async (ctx) => {
       //Forwarding files to log channel for bot admin inspection
       ctx.replyWithAudio(fileDetails.file_id, {
         chat_id: process.env.LOG_CHANNEL,
-        caption: `${fileDetails.caption}\n\n\n🆔: <code>${ctx.from.id}</code> \n👤: <code>${ctx.from.first_name}</code> \n🆔: <code>${fileDetails.shortid} </code>\n`,
+        caption: `${fileDetails.caption}\n\n🆔: <code>${ctx.from.id}</code> \n👤: <code>${ctx.from.first_name}</code> \n🆔: <code>${fileDetails.shortid} </code>\n`,
         parse_mode: "HTML",
         reply_markup: fileDetails.reply_markup ?? null,
       });
@@ -1044,7 +1044,7 @@ bot.on("message", async (ctx) => {
 
     //Sharing public link for saved files
     ctx.reply(
-      `https://t.me/${process.env.BOTUSERNAME}?start=${fileDetails.shortid}`
+      `https://telegram.me/${process.env.BOTUSERNAME}?start=${fileDetails.shortid}`
     );
   }
 });
